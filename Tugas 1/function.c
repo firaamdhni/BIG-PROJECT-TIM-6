@@ -280,3 +280,39 @@ void user_menu() {
         }
     } while (pilih != 5);
 }
+int login(char *role) {
+    FILE *file = fopen("user.txt", "r");
+    if (file == NULL) {
+        printf("File user.txt tidak ditemukan.\n");
+        return 0;
+    }
+
+    char username[50], password[50], input_user[50], input_pass[50];
+    char user_role[10];
+
+    printf("Login sebagai (admin/user): ");
+    scanf("%s", role); // Pilih role
+
+    if (strcmp(role, "admin") != 0 && strcmp(role, "user") != 0) {
+        printf("Role tidak valid. Program keluar.\n");
+        fclose(file);
+        return 0;
+    }
+
+    printf("Masukkan username: ");
+    scanf("%s", input_user);
+    printf("Masukkan password: ");
+    scanf("%s", input_pass);
+
+    // Membaca file user.txt untuk mencocokkan username, password, dan role
+    while (fscanf(file, "%49[^,],%49[^,],%9[^\n]\n", username, password, user_role) != EOF) {
+        if (strcmp(input_user, username) == 0 && strcmp(input_pass, password) == 0 && strcmp(user_role, role) == 0) {
+            fclose(file);
+            return 1; // Login berhasil
+        }
+    }
+
+    fclose(file);
+    printf("Login gagal. Username, password, atau role tidak sesuai.\n");
+    return 0; // Login gagal
+}
