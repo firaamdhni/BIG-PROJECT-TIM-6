@@ -142,3 +142,39 @@ void admin_menu() {
         }
     } while (pilih != 5);
 }
+
+// Fungsi untuk pinjam alat
+void pinjam_alat() {
+    unsigned int id_alat, jumlah;
+    printf("Masukkan ID Alat yang ingin dipinjam: ");
+    scanf("%u", &id_alat);
+
+    printf("Masukkan jumlah alat yang ingin dipinjam: ");
+    scanf("%u", &jumlah);
+    
+
+    // Cek apakah alat ada dan tersedia
+    int found = 0;
+    for (unsigned int i = 0; i < total_alat; i++) {
+        if (alat_lab[i].Id_Alat == id_alat) {
+            found = 1;
+            if (alat_lab[i].Jumlah_Tersedia >= jumlah) {
+                // Jika alat tersedia
+                peminjaman[total_peminjaman].Id_Alat = id_alat;
+                strcpy(peminjaman[total_peminjaman].Nama_Alat, alat_lab[i].Nama_Alat);
+                peminjaman[total_peminjaman].Jumlah_Pinjam = jumlah;
+
+                alat_lab[i].Jumlah_Tersedia -= jumlah;
+                total_peminjaman++;
+                simpan_data();
+                printf("Alat berhasil dipinjam.\n");
+            } else {
+                printf("Jumlah alat yang tersedia tidak cukup.\n");
+            }
+            break;
+        }
+    }
+    if (!found) {
+        printf("Alat dengan ID %u tidak ditemukan.\n", id_alat);
+    }
+}
