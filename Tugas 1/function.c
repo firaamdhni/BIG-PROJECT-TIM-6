@@ -237,3 +237,46 @@ void kembalikan_alat() {
             break;
         }
     }
+if (!found) {
+        printf("Alat dengan ID %u tidak ditemukan dalam daftar peminjaman.\n", id_alat);
+    }
+}
+
+// Menu User
+void user_menu() {
+    int pilih;
+    do {
+        printf("\n---- Menu User ----\n");
+        printf("1. Lihat Daftar Alat Lab\n");
+        printf("2. Pinjam Alat\n");
+        printf("3. Lihat Alat yang Dipinjam\n");
+        printf("4. Kembalikan Alat\n");
+        printf("5. Keluar\n");
+        printf("Pilih Opsi: ");
+        scanf("%d", &pilih);
+
+        if (pilih == 1) {
+            printf("\n---- Daftar Alat Lab ----\n");
+            printf("-------------------------------------------------------------------------------------------------------------\n");
+            printf("| %-10s | %-20s | %-15s | %-15s | %-15s | %-15s |\n", 
+            "ID Alat", "Nama Alat", "Merek", "Model", "Tahun", "Jumlah Tersedia" );
+            printf("-------------------------------------------------------------------------------------------------------------\n");
+            for (unsigned int i = 0; i < total_alat; i++) {
+                printf("| %-10u | %-20s | %-15s | %-15s | %-15u | %-15u |\n",
+                       alat_lab[i].Id_Alat,
+                       alat_lab[i].Nama_Alat,
+                       alat_lab[i].Merek,
+                       alat_lab[i].Model,
+                       alat_lab[i].Tahun_Produksi,
+                       alat_lab[i].Jumlah_Tersedia);
+            }
+            printf("-------------------------------------------------------------------------------------------------------------\n");
+        } else if (pilih == 2) {
+            pinjam_alat();
+        } else if (pilih == 3) {
+            lihat_alat_pinjam();
+        } else if (pilih == 4) {
+            kembalikan_alat();
+        }
+    } while (pilih != 5);
+}
