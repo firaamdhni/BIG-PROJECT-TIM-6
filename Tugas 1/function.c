@@ -96,3 +96,23 @@ void admin_menu() {
                 alat_lab[i].Jumlah_Unit,
                 alat_lab[i].Jumlah_Tersedia);
         }
+ printf("----------------------------------------------------------------------------------------------------------------------------\n");
+
+        } else if (pilih == 3) {
+            unsigned int Id_Alat;
+            printf("Masukkan ID Alat yang Akan Diedit: ");
+            scanf("%u", &Id_Alat);
+            int exists = 0;
+            for (unsigned int i = 0; i < total_alat; i++) {
+                if (alat_lab[i].Id_Alat == Id_Alat) {
+                    exists = 1;
+                   
+                  
+                    printf("Masukkan Jumlah Unit: ");
+                    scanf("%u", &alat_lab[i].Jumlah_Unit);
+                    alat_lab[i].Jumlah_Tersedia = alat_lab[i].Jumlah_Unit;
+                    simpan_data();
+                    printf("Alat Lab Dengan ID %u Berhasil Diedit.\n", Id_Alat);
+                    break;
+                }
+            }
