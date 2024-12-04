@@ -23,3 +23,18 @@ typedef struct {
     char Nama_Alat[50];
     unsigned int Jumlah_Pinjam;
 } Alat_Peminjaman;
+
+// Deklarasi Variabel Global
+extern Alat_Lab alat_lab[MAX_ALAT];
+extern unsigned int total_alat;
+extern unsigned int total_peminjaman;
+extern Alat_Peminjaman peminjaman[MAX_PEMINJAMAN];
+
+// Deklarasi Fungsi
+void data();
+void simpan_data();
+void admin_menu();
+void user_menu();
+int login(char *role); 
+
+#endif
